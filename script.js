@@ -8,6 +8,8 @@ const bulbasaurDiv = document.getElementById("bulbasaur");
 let userScore = 0;
 let compScore = 0;
 
+let gameInProgress = true;
+
 function getComputerChoice() {
   const choices = ["charmander", "squirtle", "bulbasaur"];
   const randomNumber = Math.floor(Math.random() * 3);
@@ -32,20 +34,46 @@ function getResult(userChoice, computerChoice) {
 }
 
 function updateScore(result, userChoice, computerChoice) {
-  if (result === "win") {
-    userScore++;
-    resultText.textContent = `You win! ${userChoice} beats ${computerChoice}.`;
-  } else if (result === "lose") {
-    compScore++;
-    resultText.textContent = `You lose! ${computerChoice} beats ${userChoice}.`;
-  } else {
-    resultText.textContent = `It's a draw! Both chose ${userChoice}.`;
-  }
-
-  userScoreSpan.textContent = userScore;
-  compScoreSpan.textContent = compScore;
-}
-
+    const userChoiceDiv = document.getElementById(userChoice);
+    const userChoiceImg = userChoiceDiv.querySelector('img');
+    const userChoiceP = userChoiceDiv.querySelector('p');
+    let bgColor;
+  
+    switch (userChoice) {
+      case "charmander":
+        bgColor = "rgba(255, 140, 0, 0.3)"; // Orange
+        break;
+      case "squirtle":
+        bgColor = "rgba(30, 144, 255, 0.3)"; // Blue
+        break;
+      case "bulbasaur":
+        bgColor = "rgba(34, 139, 34, 0.3)"; // Green
+        break;
+    }
+  
+    if (result === "win") {
+      userScore++;
+      userScoreSpan.textContent = userScore;
+      resultText.textContent = `You win! ${userChoice} beats ${computerChoice}.`;
+      userChoiceImg.style.backgroundColor = bgColor;
+      userChoiceP.style.backgroundColor = bgColor;
+    } else if (result === "lose") {
+      compScore++;
+      compScoreSpan.textContent = compScore;
+      resultText.textContent = `You lose! ${computerChoice} beats ${userChoice}.`;
+      userChoiceImg.style.backgroundColor = bgColor;
+      userChoiceP.style.backgroundColor = bgColor;
+    } else {
+      resultText.textContent = `It's a draw! Both chose ${userChoice}.`;
+    }
+  
+    setTimeout(() => {
+      userChoiceImg.style.backgroundColor = "";
+      userChoiceP.style.backgroundColor = "";
+    }, 500);
+    }
+  
+  
 /// Function to reset the game
 function resetGame() {
     userScore = 0;
@@ -54,19 +82,27 @@ function resetGame() {
     compScoreSpan.textContent = compScore;
     resultText.textContent = "Choose your Pokémon!";
     rematchButton.style.display = "none";
+    gameInProgress = true;
   }
   
   // Main function to handle the user's choice
-  function game(userChoice) {
+  // Main function to handle the user's choice
+function game(userChoice) {
+    if (!gameInProgress) {
+      return;
+    }
+    
     const computerChoice = getComputerChoice();
     const result = getResult(userChoice, computerChoice);
     updateScore(result, userChoice, computerChoice);
   
     if (userScore === 3 || compScore === 3) {
+      gameInProgress = false;
       resultText.textContent = userScore === 3 ? "Congratulations, you won! Click on Rematch to play again." : "Sorry, you lost. Click on Rematch to try again.";
       rematchButton.style.display = "block";
     }
   }
+  
   
   // Event listeners for user's choice
   charmanderDiv.addEventListener("click", function() {

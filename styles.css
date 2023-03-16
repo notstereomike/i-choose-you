@@ -1,46 +1,50 @@
 
 @media only screen and (max-width: 768px) {
     body {
-        margin: 5px;
-      }
-    
-      h1 {
-        font-size: 1.5em;
-        padding: 5px;
-        margin-bottom: 10px;
-      }
-    
-      .scores {
-        font-size: 1em;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-    
-      .choices {
-        flex-direction: column;
-        align-items: center;
-      }
-    
-      .choices div {
-        margin: 5px;
-      }
-    
-      .choices img {
-        width: 10px;
-        height: 10px;
-      }
-    
-      button.rematch-button {
-        font-size: 1em;
-        padding: 5px 10px;
-      }
-    
-      #result-text {
-        font-size: 1em;
-        margin: 10px 0;
-      }
+      margin: 2%;
+      font-size: 14px;
     }
+  
+    h1 {
+      font-size: 1.5em;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+  
+    .scores {
+      font-size: 1em;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+  
+    .choices {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .choices div {
+      margin: 3px;
+    }
+  
+    .choices img {
+      width: 25vw;
+      height: 25vw;
+      max-width: 100px;
+      max-height: 100px;
+    }
+  
+    button.rematch-button {
+      font-size: 1em;
+      padding: 5px 10px;
+    }
+  
+    #result-text {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+  }
+  
   
 
 
