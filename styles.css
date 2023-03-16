@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    margin-top: 0;
+  }
+  
+  .choices {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+
+  .choices img {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+  }
+  
+  .choices div {
+    border: none;
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .choices div:hover img {
+    background-color: #4CAF50;
+  }
+  
+  .scores {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2em;
+  }
+  
+  #result-text {
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+
+  /* Add this to your existing CSS file */
+
+button.rematch-button {
+    font-size: 1.2em;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: none; /* Hide the button initially */
+  }
+  
+  button.rematch-button:hover {
+    background-color: #45a049;
+  }
+  
+  #rematch-button-container {
+    display: flex;
+    justify-content: center;
+  }
