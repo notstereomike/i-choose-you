@@ -1,3 +1,46 @@
+/* Add this at the end of your existing CSS file */
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+    h1 {
+      font-size: 1.5em;
+      padding: 15px;
+    }
+  
+    .scores {
+      font-size: 1em;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  
+    .choices {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .choices div {
+      margin: 10px;
+    }
+  
+    .choices img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    button.rematch-button {
+      font-size: 1em;
+    }
+  
+    #result-text {
+      font-size: 1em;
+      padding-bottom: 10px;
+    }
+  }
+  
+
+
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -49,8 +92,6 @@ body {
     margin-top: 20px;
   }
 
-  /* Add this to your existing CSS file */
-
 button.rematch-button {
     font-size: 1.2em;
     background-color: #4CAF50;
@@ -63,7 +104,7 @@ button.rematch-button {
     cursor: pointer;
     margin-top: 20px;
     margin-bottom: 20px;
-    display: none; /* Hide the button initially */
+    display: none; 
   }
   
   button.rematch-button:hover {
