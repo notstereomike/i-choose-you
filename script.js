@@ -33,47 +33,86 @@ function getResult(userChoice, computerChoice) {
   return combinations[userChoice + computerChoice];
 }
 
+function checkGameOver() {
+  if (userScore >= 3 || compScore >= 3) {
+    gameInProgress = false;
+    resultText.textContent =
+      userScore >= 3
+        ? "Congratulations, you won! Click on Rematch to play again."
+        : "Sorry, you lost. Click on Rematch to try again.";
+    rematchButton.style.display = "block";
+  }
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function updateScore(result, userChoice, computerChoice) {
-    const userChoiceDiv = document.getElementById(userChoice);
-    const userChoiceImg = userChoiceDiv.querySelector('img');
-    const userChoiceP = userChoiceDiv.querySelector('p');
-    let bgColor;
+  if (!gameInProgress) {
+    return;
+  }
+
+  checkGameOver(); // Call checkGameOver() before updating the scores
+
+  if (!gameInProgress) {
+    return;
+  }
+
+  const userChoiceDiv = document.getElementById(userChoice);
+  const userChoiceImg = userChoiceDiv.querySelector('img');
+  const userChoiceP = userChoiceDiv.querySelector('p');
+  let bgColor;
+
+  switch (userChoice) {
+    case "charmander":
+      bgColor = "rgba(255, 140, 0, 0.3)"; // Orange
+      break;
+    case "squirtle":
+      bgColor = "rgba(30, 144, 255, 0.3)"; // Blue
+      break;
+    case "bulbasaur":
+      bgColor = "rgba(34, 139, 34, 0.3)"; // Green
+      break;
+  }
+
+  const capitalizedUserChoice = capitalizeFirstLetter(userChoice);
+  const capitalizedComputerChoice = capitalizeFirstLetter(computerChoice);
+
+  if (result === "win") {
+    userScore++;
+    userScoreSpan.textContent = userScore;
+    resultText.textContent = `You win! ${capitalizedUserChoice} beats ${capitalizedComputerChoice}.`;
+
+    userChoiceImg.style.backgroundColor = "";
+    userChoiceP.style.backgroundColor = "";
+
+    userChoiceImg.style.backgroundColor = bgColor;
+    userChoiceP.style.backgroundColor = bgColor;
+    userChoiceP.innerHTML = `<span style="font-weight: bold;">${capitalizedUserChoice}</span>`;
+  } else if (result === "lose") {
+    compScore++;
+    compScoreSpan.textContent = compScore;
+    resultText.textContent = `You lose! ${capitalizedComputerChoice} beats ${capitalizedUserChoice}.`;
+
+    userChoiceImg.style.backgroundColor = "";
+    userChoiceP.style.backgroundColor = "";
+
+    userChoiceImg.style.backgroundColor = bgColor;
+    userChoiceP.style.backgroundColor = bgColor;
+    userChoiceP.innerHTML = `<span style="font-weight: bold;">${capitalizedUserChoice}</span>`;
+  } else {
+    resultText.textContent = `It's a draw! Both chose ${capitalizedUserChoice}.`;
+  }
   
-    switch (userChoice) {
-      case "charmander":
-        bgColor = "rgba(255, 140, 0, 0.3)"; // Orange
-        break;
-      case "squirtle":
-        bgColor = "rgba(30, 144, 255, 0.3)"; // Blue
-        break;
-      case "bulbasaur":
-        bgColor = "rgba(34, 139, 34, 0.3)"; // Green
-        break;
-    }
+  setTimeout(() => {
+    userChoiceImg.style.backgroundColor = "";
+    userChoiceP.style.backgroundColor = "";
+    userChoiceP.textContent = userChoice;
+  }, 500);
   
-    if (result === "win") {
-      userScore++;
-      userScoreSpan.textContent = userScore;
-      resultText.textContent = `You win! ${userChoice} beats ${computerChoice}.`;
-      userChoiceImg.style.backgroundColor = bgColor;
-      userChoiceP.style.backgroundColor = bgColor;
-    } else if (result === "lose") {
-      compScore++;
-      compScoreSpan.textContent = compScore;
-      resultText.textContent = `You lose! ${computerChoice} beats ${userChoice}.`;
-      userChoiceImg.style.backgroundColor = bgColor;
-      userChoiceP.style.backgroundColor = bgColor;
-    } else {
-      resultText.textContent = `It's a draw! Both chose ${userChoice}.`;
-    }
-  
-    setTimeout(() => {
-      userChoiceImg.style.backgroundColor = "";
-      userChoiceP.style.backgroundColor = "";
-    }, 500);
-    }
-  
-  
+}
+
 /// Function to reset the game
 function resetGame() {
     userScore = 0;
@@ -85,7 +124,7 @@ function resetGame() {
     gameInProgress = true;
   }
   
-  // Main function to handle the user's choice
+  
   // Main function to handle the user's choice
 function game(userChoice) {
     if (!gameInProgress) {
@@ -96,11 +135,7 @@ function game(userChoice) {
     const result = getResult(userChoice, computerChoice);
     updateScore(result, userChoice, computerChoice);
   
-    if (userScore === 3 || compScore === 3) {
-      gameInProgress = false;
-      resultText.textContent = userScore === 3 ? "Congratulations, you won! Click on Rematch to play again." : "Sorry, you lost. Click on Rematch to try again.";
-      rematchButton.style.display = "block";
-    }
+    
   }
   
   
